@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>Review Ansible Fundamentals</title>
+<style>
+/* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment @import statement to use as custom stylesheet */
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,300italic,400,400italic,600,600italic%7CMontserrat:400,400italic,700,700italic%7CSource+Code+Pro:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*::before,*::after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#E6F5FB;color:#173361;padding:0;margin:0;font-family:"Montserrat","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#173361;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#0074A2;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Montserrat","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#173361;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1,h2,h3,h4{font-weight:600}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h3{border-width: 1px}
+h3{text-decoration: underline}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #e0e0dc;border-width:2px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Source Code Pro","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite::before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h3{text-decoration: underline}
+h4{font-size:1.4375em}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+:not(pre)>code.nobreak{word-wrap:normal}
+:not(pre)>code.nowrap{white-space:nowrap}
+pre{color:rgba(0,0,0,.9);font-family:"Source Code Pro","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Source Code Pro","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:#173361;margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:2px solid #173361}
+/* The following line defines the separator line that follows the course title */
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:3px solid #173361;padding-bottom:8px}
+#header .details{border-bottom:2px solid #173361;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:2px solid #173361;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:5px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Montserrat","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#173361;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:5px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:5px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:8px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#173361;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details>summary:first-of-type{cursor:pointer;display:list-item;outline:none;margin-bottom:.75em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Montserrat","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class="paragraph"]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>[class="paragraph"]:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Montserrat","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:2px solid #173361;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#173361;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class="highlight"],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos{border-right:1px solid currentColor;opacity:.35;padding-right:.5em}
+pre.pygments .lineno{border-right:1px solid currentColor;opacity:.35;display:inline-block;margin-right:.75em}
+pre.pygments .lineno::before{content:"";margin-right:-.125em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#173361;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Montserrat","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #0074a2}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;text-align:left;margin-right:0}
+table.tableblock{max-width:100%;border-collapse:separate}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot,table.frame-ends{border-width:1px 0}
+table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);-webkit-border-radius:50%;border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Montserrat","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#00AFBA;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:2px solid #173361!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media print,amzn-kf8{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Review Ansible Fundamentals</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_lecture">Lecture</a>
+<ul class="sectlevel2">
+<li><a href="#_ansible_architecture">Ansible Architecture</a></li>
+</ul>
+</li>
+<li><a href="#_activity">Activity</a>
+<ul class="sectlevel2">
+<li><a href="#_install_ansible">Install Ansible</a></li>
+<li><a href="#_open_a_folder_in_visual_studio_code">Open a Folder in Visual Studio Code</a></li>
+<li><a href="#_explore_a_host_inventory">Explore a Host Inventory</a></li>
+<li><a href="#_run_a_module_on_the_hosts">Run a Module on the Hosts</a></li>
+<li><a href="#_explore_playbooks">Explore Playbooks</a></li>
+<li><a href="#_set_group_variables_with_group_vars_and_encrypt_secrets_with_ansible_vault">Set Group Variables with <code>group_vars</code> and Encrypt Secrets with Ansible Vault</a></li>
+<li><a href="#_optional_create_a_sample_role">(Optional) Create a Sample Role</a></li>
+<li><a href="#_clean_up">Clean Up</a></li>
+</ul>
+</li>
+<li><a href="#_activity_debrief">Activity Debrief</a>
+<ul class="sectlevel2">
+<li><a href="#_what_is_an_ansible_role">What is an Ansible Role?</a></li>
+<li><a href="#_discussion_questions">Discussion Questions</a></li>
+</ul>
+</li>
+<li><a href="#_summary">Summary</a>
+<ul class="sectlevel2">
+<li><a href="#_references">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Being successful with the Ansible Playbooks for Confluent Platform doesn&#8217;t actually require high levels of Ansible expertise. By practicing a few fundamental Ansible principles, anyone can become productive with Ansible Playbooks for Confluent Platform in a relatively short time.</p>
+</div>
+<div class="paragraph">
+<p>In this module, you will review and practice Ansible fundamentals like:</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Inventories</p>
+</li>
+<li>
+<p>Playbooks</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Variables</p>
+</li>
+<li>
+<p>Ansible Vault</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Modules</p>
+</li>
+<li>
+<p>Roles</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are already familiar with Ansible, you can safely skip this module.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lecture">Lecture</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_ansible_architecture">Ansible Architecture</h3>
+<div class="imageblock">
+<div class="content">
+<img src="ansible-architecture.svg" alt="ansible architecture">
+</div>
+</div>
+<hr>
+<div class="paragraph">
+<p>Ansible provides an automation engine to configure remote systems at scale. Ansible uses YAML (Yet Another Markup Language) files to provide a straightforward syntax rather than endless bash scripts. Ansible strives to make its configurations idempotent, which means that it can be run multiple times with the same effect as running once. This helps to save time on subsequent runs by skipping tasks that don&#8217;t need to be repeated.</p>
+</div>
+<div class="paragraph">
+<p>Ansible has a "push" architecture. There is a central machine called the <strong>Ansible control node</strong> (or controller) that has <code>ssh</code> access to a set of target hosts. There are no extra servers, daemons, or databases required.</p>
+</div>
+<div class="paragraph">
+<p>Ansible is written in Python, and comes with many built-in Python programs called <strong>modules</strong>. The Ansible control node establishes an <code>ssh</code> connection to the target hosts, loads the modules onto the hosts, runs them, and then removes them after it is finished.</p>
+</div>
+<div class="paragraph">
+<p>There is a vibrant Ansible community that provides much more functionality through the <a href="https://galaxy.ansible.com/" target="_blank" rel="noopener">Ansible Galaxy website</a>, including custom modules, roles, and collections.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_activity">Activity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The purpose of this activity is to practice hands-on with a typical Ansible workflow, which includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Installing Ansible in a Python virtual environment</p>
+</li>
+<li>
+<p>Inspecting a host inventory file with multiple groups</p>
+</li>
+<li>
+<p>Using a module to execute code remotely on an Ansible target host</p>
+</li>
+<li>
+<p>Inspecting playbooks</p>
+</li>
+<li>
+<p>Defining variables under the <code>group_vars</code> directory</p>
+</li>
+<li>
+<p>Encrypting variables with Ansible Vault</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_install_ansible">Install Ansible</h3>
+<div class="paragraph">
+<p>Ansible is a tool written in Python. It is considered a best practice in Python to install dependencies in a "virtual environment" to avoid conflicts with the system&#8217;s Python packages. Here, we install Ansible in a Python virtual environment.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you would like to skip the installation, a virtual environment <code>~/venv</code> has already been created and configured. Feel free to use <code>~/venv</code> instead of creating <code>~/testenv</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a virtual environment called <code>testenv</code> located in the <code>/home/training</code> directory.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python3 <span class="nt">-m</span> venv /home/training/testenv</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>-m</code> option specifies a module to run, which in this case is the <code>venv</code> module.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Activate the virtual environment.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nb">source</span> ~/testenv/bin/activate</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The prompt should now show <code>(testenv)</code> to indicate that you are using the virtual environment. We can now use <code>python</code> and <code>pip</code> instead of <code>python3</code> and <code>pip3</code>, since the virtual environment was created with Python 3. You can verify this with <code>python --version</code>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Update <code>pip</code>, the Python package manager</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">--upgrade</span> pip</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Install Ansible with <code>pip</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python <span class="nt">-m</span> pip <span class="nb">install </span>ansible-core</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Install some required "collections" with <code>ansible-galaxy</code>, Ansible&#8217;s own "package manager" of sorts.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible-galaxy <span class="nb">install</span> <span class="nt">-r</span> ~/course/requirements.yml <span class="o">&amp;&amp;</span> <span class="se">\</span>
+    ansible-galaxy collection list</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Collections are public Ansible repositories available on Ansible Galaxy. In this case, the collections have already been installed for you.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_open_a_folder_in_visual_studio_code">Open a Folder in Visual Studio Code</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the <code>ansible-intro</code> folder with Visual Studio Code to inspect files and run commands for the rest of the activity.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">code ~/course/ansible-intro</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open a terminal inside of VS Code with <code>Ctrl+Shift+`</code> and activate the <code>testenv</code> virtual environment.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Replace <code>testenv</code> with <code>venv</code> if you skipped the installation step.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nb">source</span> ~/testenv/bin/activate</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You should see <code>(testenv)</code> in the prompt again.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_explore_a_host_inventory">Explore a Host Inventory</h3>
+<div class="paragraph">
+<p>This lab environment uses Docker Compose to simulate virtual machines running in a remote datacenter.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Inspect <code>docker-compose.yml</code> and create the hosts <code>host1.test.confluent</code> and <code>host2.test.confluent</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">docker-compose up <span class="nt">-d</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>-d</code> option means "detached", which means that server logs won&#8217;t print to standard output.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Inspect the host inventory file <code>hosts.yml</code>. What do you notice? What do you wonder? Write down a few thoughts and compare to the sample response.</p>
+<details>
+<summary class="title">sample response</summary>
+<div class="content">
+<div class="paragraph">
+<p>Ansible uses an inventory file to describe the hosts it will configure. The creator of the inventory file can categorize different hosts into <strong>groups</strong> and label the groups whatever they want.</p>
+</div>
+<div class="paragraph">
+<p>The only group Ansible requires is <code>all</code>, which refers to all hosts defined anywhere in the inventory. The variables (<code>vars</code>) defined under the <code>all</code> group apply to all hosts. This is where <code>ansible_connection</code>,  and other global variables are defined. In this case, we use the <code>docker</code> connection to connect to docker hosts, but usually this connection will be <code>ssh</code>.</p>
+</div>
+<div class="paragraph">
+<p>In Ansible, <code>become</code> refers to which user is used on the target host. Usually <code>become</code> is set to true and the user is some user with root privileges. This allows the Ansible control node to use elevated privileges to install software.</p>
+</div>
+<div class="paragraph">
+<p>This inventory file has two user-defined groups of hosts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>atlanta</code>&#8201;&#8212;&#8201;this group is called "atlanta", perhaps to specify that hosts in this group are geographically located in Atlanta</p>
+</li>
+<li>
+<p><code>boston</code>&#8201;&#8212;&#8201;again, this group is probably named to denote the geographical region of the hosts</p>
+</li>
+</ul>
+</div>
+</div>
+</details>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_a_module_on_the_hosts">Run a Module on the Hosts</h3>
+<div class="paragraph">
+<p>Ansible uses <strong>modules</strong> to run programs on remote hosts. There are many modules built into Ansible, and more modules can be installed through Ansible Galaxy collections.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the <code>ping</code> module against the hosts in the <code>atlanta</code> group.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible <span class="nt">-m</span> ping <span class="se">\</span>
+    <span class="nt">-i</span> ~/course/ansible-intro/hosts.yml <span class="se">\</span>
+    atlanta</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You should see output from the host that responds with "pong"
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Run the <code>ping</code> module against the hosts in the <code>boston</code> group.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible <span class="nt">-m</span> ping <span class="se">\</span>
+    <span class="nt">-i</span> ~/course/ansible-intro/hosts.yml <span class="se">\</span>
+    boston</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the <code>ping</code> module against all hosts.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible <span class="nt">-m</span> ping <span class="se">\</span>
+    <span class="nt">-i</span> ~/course/ansible-intro/hosts.yml <span class="se">\</span>
+    all</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_explore_playbooks">Explore Playbooks</h3>
+<div class="paragraph">
+<p>In the Ansible world, a <strong>playbook</strong> is a YAML file that defines what will execute on target hosts.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Inspect the file <code>playbook_atlanta.yml</code>. What do you notice? What do you wonder? Write down a few thoughts and compare against the sample response.</p>
+<details>
+<summary class="title">sample response</summary>
+<div class="content">
+<div class="paragraph">
+<p>This playbook defines a couple of <strong>tasks</strong> to be run againsts hosts in the <code>atlanta</code> group. A <strong>task</strong> specifies a human-readable name, a module, some specifications for the module, and perhaps some task-specific variables.</p>
+</div>
+<div class="paragraph">
+<p>There is a variable called <code>awesome_string</code> that is set to the value of another variable, called <code>vault_awesome_string</code> using Jinja variable templating with double brackets&#8201;&#8212;&#8201;<code>"{{ &#8230;&#8203; }}"</code>. The actual value of the <code>vault_awesome_string</code> variable will be explored in the next section.</p>
+</div>
+<div class="paragraph">
+<p>The first task uses the built-in shell module to run a shell command and register the output to a new variable called <code>response</code>.</p>
+</div>
+<div class="paragraph">
+<p>The second task uses the <code>debug</code> module to output some contents of the <code>response</code> variable.</p>
+</div>
+<div class="paragraph">
+<p>The third task uses the built-in yum module to install the Apache httpd webserver package with the yum package manager.</p>
+</div>
+</div>
+</details>
+</li>
+<li>
+<p>Run the <code>playbook_atlanta.yml</code> playbook against the host inventory</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible-playbook <span class="se">\</span>
+    ~/course/ansible-intro/playbook_atlanta.yml <span class="se">\</span>
+    <span class="nt">-i</span> ~/course/ansible-intro/hosts.yml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Notice the tasks only ran on hosts in the <code>atlanta</code> group, as specified in the playbook.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Inspect the file <code>playbook_all.yml</code>. What do you notice? What do you wonder? Write down a few thoughts and compare against the sample response.</p>
+<details>
+<summary class="title">sample response</summary>
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This playbook runs against all hosts instead of just the <code>atlanta</code> hosts</p>
+</li>
+<li>
+<p>The playbook uses <code>inventory_hostname</code> and <code>group_names</code> variables, which are built-in Ansible variables that capture information about each host</p>
+</li>
+<li>
+<p>This playbook imports the other playbook, so <code>playbook_atlanta.yml</code> will run against the hosts in the <code>atlanta</code> group as well</p>
+</li>
+</ul>
+</div>
+</div>
+</details>
+</li>
+<li>
+<p>Run the <code>playbook_all.yml</code> playbook against the host inventory and notice what happens.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible-playbook <span class="se">\</span>
+    ~/course/ansible-intro/playbook_all.yml <span class="se">\</span>
+    <span class="nt">-i</span> ~/course/ansible-intro/hosts.yml</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_group_variables_with_group_vars_and_encrypt_secrets_with_ansible_vault">Set Group Variables with <code>group_vars</code> and Encrypt Secrets with Ansible Vault</h3>
+<div class="paragraph">
+<p>It is common practice to use a <code>group_vars</code> directory to define variables for different groups of hosts. Furthermore, it is important to encrypt variables with sensitive credentials so they aren&#8217;t compromised in source control.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Notice that there is a directory called <code>group_vars</code> at the same level as the inventory file <code>hosts.yml</code> in <code>~/course/ansible-intro/</code>. Further notice that under <code>group_vars</code>, there is another directory called <code>atlanta</code>. This is no accident. Ansible looks for directories under <code>group_vars</code> whose names correspond to host groups. Any variables defined in YAML files in <code>group_vars/atlanta</code> will be available for hosts in that group.</p>
+</li>
+<li>
+<p>Inspect the file <code>~/course/ansible-intro/group_vars/atlanta/vault.yml</code>. Notice that this is where the variable <code>vault_awesome_string</code> is defined for hosts in the <code>atlanta</code> group.</p>
+</li>
+<li>
+<p>It is vital to encrypt sensitive credentials so they aren&#8217;t exposed in source control. Use Ansible Vault to encrypt <code>vault.yml</code> using the password <strong>confluent</strong> when prompted.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible-vault encrypt ~/course/ansible-intro/group_vars/atlanta/vault.yml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You should now see the contents of <code>vault.yml</code> have been encrypted. If you want to view the unencrypted contents, you can run <code>ansible-vault view ~/course/ansible-intro/group_vars/atlanta/vault.yml</code>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Run <code>playbook_atlanta.yml</code> on the hosts again, using vault password <strong>confluent</strong>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible-playbook <span class="nt">--ask-vault-pass</span> <span class="se">\</span>
+    playbook_atlanta.yml <span class="se">\</span>
+    <span class="nt">-i</span> hosts.yml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Notice the tasks are able to access the encrypted variables. Note that it is not secure to use the <code>debug</code> module to view encrypted secrets in the task output. This was only done for demonstration purposes. If you want to suppress the output of certain tasks, you can set the built-in <code>no_log</code> variable to <code>True</code> on those tasks.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_create_a_sample_role">(Optional) Create a Sample Role</h3>
+<div class="paragraph">
+<p>Playbooks can get crowded and hard to reason about. Ansible uses the concept of a <strong>role</strong> to package up related tasks to be shared and referenced in playbooks.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create an Ansible role called <code>sample-role</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible-galaxy role init sample-role</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Take note of the folder structure and inspect some of the files. This will be discussed more in the activity debrief.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_clean_up">Clean Up</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Destroy your hosts.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">docker-compose down</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_activity_debrief">Activity Debrief</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_what_is_an_ansible_role">What is an Ansible Role?</h3>
+<details>
+<summary class="title">tasks</summary>
+<div class="content">
+<div class="paragraph">
+<p>The tasks directory is the most important part of the role. The files in this directory define the tasks that will run on the hosts. When first learning what a role does, it is a good idea to start in this directory.</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">templates</summary>
+<div class="content">
+<div class="paragraph">
+<p>Templates generate files that will end up on the hosts. Ansible uses the Jinja templating engine, which enables files to be created with conditional logic and variables. Here is an example of a Jinja template from Ansible Playbooks for Confluent Platform that generates Kafka broker <code>server.properties</code> files:</p>
+</div>
+<div class="listingblock">
+<div class="title">server.properties.j2</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="jinja"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre># Maintained by CP Ansible
+<span class="c">{# kafka_broker_final_properties defined in the confluent.variables role #}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">key</span><span class="p">,</span> <span class="nv">value</span> <span class="ow">in</span> <span class="nv">kafka_broker_final_properties</span><span class="o">|</span><span class="nf">dictsort</span><span class="cp">%}</span>
+<span class="cp">{{</span><span class="nv">key</span><span class="cp">}}</span>=<span class="cp">{{</span><span class="nv">value</span><span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Line 1 is text that will appear literally in the server.properties file.</p>
+</div>
+<div class="paragraph">
+<p>Line 2 is a Jinja comment, so it won&#8217;t appear in the server.properties file.</p>
+</div>
+<div class="paragraph">
+<p>Line 3 shows a <code>for</code> loop that iterates through a dictionary and sorts the dictionary with Jinja&#8217;s built-in <code>dictsort</code> filter.</p>
+</div>
+<div class="paragraph">
+<p>Line 4 puts text in the file according to the values of those variables.</p>
+</div>
+<div class="paragraph">
+<p>Line 5 ends the <code>for</code> loop.</p>
+</div>
+<div class="paragraph">
+<p>The end result is for several lines of text to appear in the file according the entries in the <code>kafka_broker_final_properties</code> dictionary.</p>
+</div>
+<div class="paragraph">
+<p>It is important to note how Jinja uses braces <code>{}</code> to set an execution context and double braces <code>{{}}</code> to reference variables.</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">defaults</summary>
+<div class="content">
+<div class="paragraph">
+<p>The values given to variables in this <code>defaults</code> directory are default values that are used if you don&#8217;t override them elsewhere. These values have the lowest precendence and are easily overridden. Usually, you assign values to variables in the appropriate <code>group_vars</code> subdirectory alongside your host inventory file, and any variables you didn&#8217;t explicitly assign will be given their default values from this <code>defaults</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>There is a reference to variable precedence documentation in the <a href="#_references">References</a> section.</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">handlers</summary>
+<div class="content">
+<div class="paragraph">
+<p>The <code>handlers</code> directory is home to special tasks called <strong>handlers</strong>. A handler is a task that triggers only when the state of something changes. A handler is notified of a change using the <code>notify</code> keyword.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example of a task in <code>tasks/main.yml</code> that notifies a handler called <code>restart kafka</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">tasks/main.yml</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yml"><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Write Service Overrides</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">override.conf.j2</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">kafka_broker.systemd_override</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="m">0640</span>
+    <span class="na">owner</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{kafka_broker_user}}"</span>
+    <span class="na">group</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{kafka_broker_group}}"</span>
+  <span class="na">notify</span><span class="pi">:</span> <span class="s">restart kafka</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And here is the corresponding handler in the handler directory:</p>
+</div>
+<div class="listingblock">
+<div class="title">handlers/main.yml</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yml"><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">restart kafka</span>
+  <span class="na">systemd</span><span class="pi">:</span>
+    <span class="na">daemon_reload</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{kafka_broker_service_name}}"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">restarted</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the task creates a systemd service override file from a template. If the file doesn&#8217;t exist or changes, it notifies the handler named <code>restart kafka</code>. The <code>restart kafka</code> handler uses the systemd module to reload systemd and restart the Kafka service.</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">meta</summary>
+<div class="content">
+<div class="paragraph">
+<p>Files in the <code>meta</code> directory provide information about the role itself (metadata). This could include information about the author of the role, the namespace on Ansible Galaxy where you can find the role, role dependencies, and other metadata.</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">tests</summary>
+<div class="content">
+<div class="paragraph">
+<p>This directory usually has a sample inventory file, e.g. <code>test-hosts.yml</code>, that points to localhost or hosts in a test environment. The inventory would be alongside a playbook, e.g. <code>test.yml</code>, that calls the role with <code>import_role</code>. Runing the playbook tests the role on the test hosts.</p>
+</div>
+<div class="paragraph">
+<p>In practice, many role authors choose to use Ansible Molecule as a testing framework. Ansible Molecule uses Docker to create hosts and test different scenarios. We will see this in a later learning module.</p>
+</div>
+</div>
+</details>
+<hr>
+<div class="paragraph">
+<p>Playbooks can get crowded and hard to reason about. Ansible uses the concept of a <strong>role</strong> to package up related tasks to be shared and referenced in playbooks with an <code>import_role</code> task. Roles are organized into all the parts shown in this slide.</p>
+</div>
+<div class="paragraph">
+<p>This is just a brief overview. In later learning modules, you will look at roles in the CP Ansible project in more detail.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_discussion_questions">Discussion Questions</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>What do the different parts of this Ansible command do?</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible <span class="nt">-m</span> ping <span class="se">\</span>
+    <span class="nt">-i</span> ~/course/ansible-intro/hosts.yml <span class="se">\</span>
+    boston</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">sample response</summary>
+<div class="content">
+<div class="paragraph">
+<p>This command executes the <code>ping</code> module on hosts in the <code>boston</code> group of the <code>hosts.yml</code> inventory file.</p>
+</div>
+</div>
+</details>
+</li>
+<li>
+<p>What do the different parts of this Ansible command do?</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">ansible-playbook <span class="se">\</span>
+    ~/course/ansible-intro/playbook_atlanta.yml <span class="se">\</span>
+    <span class="nt">-i</span> ~/course/ansible-intro/hosts.yml</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">sample response</summary>
+<div class="content">
+<div class="paragraph">
+<p>This command runs the playbook <code>playbook_atlanta.yml</code> file on hosts in the <code>hosts.yml</code> file.</p>
+</div>
+</div>
+</details>
+</li>
+<li>
+<p>What is the <code>group_vars</code> directory and how does it work to define variables for different groups of hosts?</p>
+<details>
+<summary class="title">sample response</summary>
+<div class="content">
+<div class="paragraph">
+<p>Ansible looks for directories under <code>group_vars</code> whose names correspond to host groups defined in a host inventory file.</p>
+</div>
+<div class="paragraph">
+<p>Example: Any variables defined in YAML files in the <code>group_vars/all/</code> directory will be available for all hosts.</p>
+</div>
+<div class="paragraph">
+<p>Example: If there is a host group called <code>atlanta</code>, then the variables defined in YAML files in the <code>group_vars/atlanta/</code> directory will be available for hosts in the <code>atlanta</code> group.</p>
+</div>
+</div>
+</details>
+</li>
+<li>
+<p>What is Ansible Vault and why is it important?</p>
+<details>
+<summary class="title">sample response</summary>
+<div class="content">
+<div class="paragraph">
+<p>Ansible Vault refers to the <code>ansible-vault</code> command line utility. Ansible Vault allows you to encrypt files that contain sensitive credentails. This is important because Ansible projects are often source controlled in shared code repositories, and the set of people who have read access to the repository may be different from the set of people who should have access to the sensitive credential.</p>
+</div>
+<div class="paragraph">
+<p>The password for a file encrypted with Ansible Vault should be stored securely in a password manager or secure credential storage service like Hashicorp Vault. A common workflow is to authorize the Ansible control node to access relevant Ansible Vault passwords from a credential storage service and then retrieve the passwords at runtime using a <a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html#storing-passwords-in-third-party-tools-with-vault-password-client-scripts" target="_blank" rel="noopener">password client script</a>.</p>
+</div>
+</div>
+</details>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary">Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this module, you practiced hands-on with a typical Ansible workflow:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Installing Ansible in a Python virtual environment</p>
+</li>
+<li>
+<p>Inspecting a host inventory file with multiple groups</p>
+</li>
+<li>
+<p>Using a module to execute code remotely on an Ansible target host</p>
+</li>
+<li>
+<p>Inspecting playbooks</p>
+</li>
+<li>
+<p>Defining variables under the <code>group_vars</code> directory</p>
+</li>
+<li>
+<p>Encrypting variables with Ansible Vault</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With this workflow, you reviewed fundamental Ansible concepts:</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Inventories</p>
+</li>
+<li>
+<p>Playbooks</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Variables</p>
+</li>
+<li>
+<p>Ansible Vault</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Modules</p>
+</li>
+<li>
+<p>Roles</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_references">References</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.ansible.com/ansible/latest/index.html" target="_blank" rel="noopener">Ansible documentation</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html" target="_blank" rel="noopener">YAML Syntax Reference</a></p>
+</li>
+<li>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/index_module.html" target="_blank" rel="noopener">Index of all Ansible modules</a></p>
+</li>
+<li>
+<p><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html" target="_blank" rel="noopener">Ansible Vault documentation</a></p>
+</li>
+<li>
+<p><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#understanding-variable-precedence" target="_blank" rel="noopener">Ansible Variable Precedence</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://galaxy.ansible.com/" target="_blank" rel="noopener">Ansible Galaxy</a></p>
+</li>
+<li>
+<p>Comprehensive <a href="https://www.jeffgeerling.com/blog/2020/ansible-101-jeff-geerling-youtube-streaming-series">Ansible 101</a> video series by Jeff Geerling</p>
+</li>
+<li>
+<p><a href="https://github.com/geerlingguy/ansible-for-devops">Ansible for DevOps Examples</a> by Jeff Geerling</p>
+</li>
+<li>
+<p><a href="https://jinja.palletsprojects.com/en/3.0.x/templates/?highlight=dict#list-of-builtin-filters">List of built-in Jinja filters</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-06-13 13:19:10 UTC
+</div>
+</div>
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"
+></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+<script>
+  $(function () {
+    // Add the html after code block
+    $('.highlight').after('<a href="javascript:;" class="copy-btn">Copy</a>');
+
+    var clipboard = new ClipboardJS('.copy-btn', {
+      target: function (trigger) {
+        return trigger.previousElementSibling;
+      },
+    });
+
+    clipboard.on('success', function (e) {
+      e.clearSelection();
+      /* e.trigger.classList.add('copied');
+
+      setTimeout(function () {
+        e.trigger.classList.remove('copied');
+      }, 1500);*/
+    });
+  });
+</script>
+</body>
+</html>
